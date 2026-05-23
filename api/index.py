@@ -112,6 +112,11 @@ HTML_CODE = """
 </html>
 """
 
-@app.route("/")
-def home():
+# Replace the old @app.route("/") lines at the bottom with this:
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
     return render_template_string(HTML_CODE)
+
+if __name__ == "__main__":
+    app.run(debug=True)
